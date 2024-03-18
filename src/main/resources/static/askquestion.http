@@ -4,13 +4,33 @@ POST http://localhost:8080/api/ollama/askquestion
 Content-Type: application/json
 
 {
+  "model": "gemma:2b",
   "messages": [
     {
       "content": "How much is anything divided by zero?",
       "role": "user"
+    },
+    {
+      "content": "Can we divide by zero in other mathematical systems than Decimal System?",
+      "role": "user"
     }
-  ]
+  ],
+  "stream": false
 }
 
 
 ###
+
+POST http://localhost:8080/api/ollama/askquestion
+Content-Type: application/json
+
+{
+  "model": "gemma:2b",
+  "messages": [
+    {
+      "content": "How to parse a string to integer in Java?",
+      "role": "user"
+    }
+  ],
+  "stream": false
+}
