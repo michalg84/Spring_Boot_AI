@@ -1,0 +1,17 @@
+
+###
+POST http://localhost:8080/api/ollama/asksimplequestion
+Content-Type: application/json
+
+{
+  "question": "How much is 2 + 4 ?"
+}
+
+
+###
+POST http://localhost:8080/api/ollama/asksimplequestion
+Content-Type: application/json
+
+{
+"question": "What is a Boat?"
+}

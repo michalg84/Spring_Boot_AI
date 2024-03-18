@@ -1,0 +1,16 @@
+
+###
+POST http://localhost:8080/api/ollama/askquestion
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "content": "How much is anything divided by zero?",
+      "role": "user"
+    }
+  ]
+}
+
+
+###
