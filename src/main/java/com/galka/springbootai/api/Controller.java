@@ -1,13 +1,11 @@
 package com.galka.springbootai.api;
 
-import ch.qos.logback.classic.LoggerContext;
 import com.galka.springbootai.model.Model;
+import com.galka.springbootai.service.OllamaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.ChatResponse;
-import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.ollama.OllamaChatClient;
 import org.springframework.ai.ollama.api.OllamaApi;
 import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class Controller {
     Logger log = LoggerFactory.getLogger(Controller.class);
 
     @Autowired
-    private OllamaChatClient ollamaChatClient;
+    private OllamaService ollamaService;
 
     @PostMapping("/asksimplequestion")
     public String askSimpleQuestion(@RequestBody Model request) {
@@ -33,7 +31,7 @@ public class Controller {
         if (!StringUtils.hasText(request.getQuestion())) {
             return "Please provide valid question";
         }
-        String response = ollamaChatClient.call(request.getQuestion());
+        String response = ollamaService.call(request.getQuestion());
         log.info(response);
         return response;
     }
@@ -46,7 +44,7 @@ public class Controller {
                 .collect(Collectors.joining());
         OllamaOptions ollamaOptions = OllamaOptions.create().withModel(request.model());
         Prompt prompt = new Prompt(questions, ollamaOptions);
-        ChatResponse chatResponse = ollamaChatClient.call(prompt);
+        ChatResponse chatResponse = ollamaService.call(prompt);
         log.info(chatResponse.toString());
         return chatResponse;
     }
