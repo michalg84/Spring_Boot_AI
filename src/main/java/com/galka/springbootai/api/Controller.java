@@ -2,6 +2,9 @@ package com.galka.springbootai.api;
 
 import com.galka.springbootai.model.Model;
 import com.galka.springbootai.service.OllamaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.ChatResponse;
@@ -25,8 +28,10 @@ public class Controller {
     @Autowired
     private OllamaService ollamaService;
 
+    @Operation(summary = "Ask simple text question")
+    @ApiResponse(responseCode = "200", description = "Ollama LLM model response")
     @PostMapping("/asksimplequestion")
-    public String askSimpleQuestion(@RequestBody Model request) {
+    public String askSimpleQuestion(@RequestBody @Parameter(description = "Request model") Model request) {
         log.info(request.toString());
         if (!StringUtils.hasText(request.getQuestion())) {
             return "Please provide valid question";
